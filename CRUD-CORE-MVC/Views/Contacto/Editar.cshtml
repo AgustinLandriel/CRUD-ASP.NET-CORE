@@ -1,0 +1,36 @@
+﻿@model ContactoModel
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card bg-dark text-white">
+    <div class="card-header">
+        <h5 class="text-danger">Editar contacto</h5>
+    </div>
+    <div class="card-body">
+        @* Estos atributos hacen referencia al controlador Contacto/Guardar que recibe el post*@
+        <form asp-action="Editar" asp-controller="Contacto" method="post">
+            <input asp-for="idContacto" type="hidden" class="form-control">
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Correo" type="email" class="form-control">
+                <span asp-validation-for="Correo" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input asp-for="Nombre" type="text" class="form-control">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefono</label>
+                <input asp-for="Telefono" type="text" class="form-control">
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-warning mx-3">Confirmar</button>
+            <a asp-action="Listar" asp-controller="Contacto">Volver a la lista</a>
+        </form>
+    </div>
+</div>
+

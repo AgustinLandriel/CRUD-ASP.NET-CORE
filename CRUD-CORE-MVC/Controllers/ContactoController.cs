@@ -31,14 +31,53 @@ namespace CRUD_CORE_MVC.Controllers
             }
 
             //Se crea un contacto nuevo
-            
-              datos.AgregarContacto(contacto);
+             bool respuesta = datos.AgregarContacto(contacto);
                 
-            //Redirecciono a la pagina listar
-            RedirectToAction("Listar"); // Es como el Response.Redirect en web forms
-            return View();
+            if (respuesta) // Si se agrega el contacto, redirecciono a la view listar.
+            {
+               return RedirectToAction("Listar"); 
+
+            } else
+            {
+                return View();
+            }
         }
 
-        
+        public IActionResult Editar( int idContacto)
+        {
+            var contacto = datos.ObtenerContacto(idContacto);
+            return View(contacto);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(ContactoModel contacto)
+        {
+
+            if (!ModelState.IsValid) // Si no se valida el modelo devuelvo la vista
+            {
+                return View();
+            }
+
+            //Se crea un contacto nuevo
+            
+            bool respuesta = datos.ModificarContacto(contacto);
+
+            if (respuesta) // Si se agrega el contacto, redirecciono a la view listar.
+            {
+                return RedirectToAction("Listar");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public IActionResult Eliminar(int idContacto)
+        {
+            datos.EliminarContacto(idContacto);
+            return RedirectToAction("Listar");
+        }
+
     }
 }
