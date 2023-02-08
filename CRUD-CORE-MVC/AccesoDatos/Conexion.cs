@@ -9,7 +9,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
         //Atributos
         private string conexionSQL = string.Empty;
         private SqlCommand comando;
-        private SqlDataReader lector;
+        public SqlDataReader Lector { get; set; }
         private SqlConnection conexion;
 
 
@@ -34,13 +34,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
         {
             get { return conexionSQL; }
         }
-       
-
-        public SqlDataReader Lector
-        {
-            get { return lector; }
-        }
-
+ 
 
         public void setQuery(string consulta)
         {
@@ -88,7 +82,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
                 conexion.Open();
 
                 //Traigo al lector toda las columnas de datos
-                lector = comando.ExecuteReader();
+               // lector = comando.ExecuteReader();
                 
             }
             catch (Exception)
