@@ -11,11 +11,11 @@ namespace CRUD_CORE_MVC.Controllers
 
         public IActionResult Listar()
         {
-            //Se muestra la lista de contactos
+           //Se muestra la lista de contactos
             
-          // var lista = datos.ListarContacto();
+          var lista = datos.ListarContacto();
 
-            return View();
+            return View(lista);
         }
         public IActionResult Guardar()
         {

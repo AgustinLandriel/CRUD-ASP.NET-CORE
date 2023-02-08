@@ -19,13 +19,13 @@ namespace CRUD_CORE_MVC.AccesoDatos
             Conexion datos = new Conexion();
             SqlConnection conexion = new SqlConnection(datos.ConexionSQL);
             SqlCommand cmd = new SqlCommand("SP_LISTAR", conexion);
+            conexion.Open();
             cmd.CommandType = CommandType.StoredProcedure;
             datos.Lector = cmd.ExecuteReader();
-            conexion.Open();
 
             try
             {
-                while (!datos.Lector.Read())
+                while (datos.Lector.Read())
                 {
                     ContactoModel contactoAux = new ContactoModel();
 
