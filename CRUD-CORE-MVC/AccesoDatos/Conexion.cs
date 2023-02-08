@@ -7,7 +7,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
     {
 
         //Atributos
-        private string conexionSQL;
+        private string conexionSQL = string.Empty;
         private SqlCommand comando;
         private SqlDataReader lector;
         private SqlConnection conexion;
@@ -20,9 +20,9 @@ namespace CRUD_CORE_MVC.AccesoDatos
             
             conexionSQL = builder.GetSection("ConnectionStrings:conexionSQL").Value;
            
-            SqlCommand comando = new SqlCommand();
+            //SqlCommand comando = new SqlCommand();
 
-            SqlConnection conexion = new SqlConnection(conexionSQL);
+           // SqlConnection conexion = new SqlConnection(conexionSQL);
 
         
         }
@@ -30,10 +30,11 @@ namespace CRUD_CORE_MVC.AccesoDatos
         //Metodos
 
 
-        //public string ConexionSQL()
-        //{
-        //    return conexionSQL;
-        //}
+        public string ConexionSQL
+        {
+            get { return conexionSQL; }
+        }
+       
 
         public SqlDataReader Lector
         {
@@ -51,7 +52,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
 
         public void setSP(string storeProcedure)
         {
-            comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.CommandText = storeProcedure;
         }
 

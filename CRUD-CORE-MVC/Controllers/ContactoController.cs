@@ -16,6 +16,10 @@ namespace CRUD_CORE_MVC.Controllers
 
             return View(lista);
         }
+        public IActionResult Guardar()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Guardar(ContactoModel contacto)
@@ -29,9 +33,5 @@ namespace CRUD_CORE_MVC.Controllers
         }
 
         
-        public IActionResult Modificar()
-        {
-            return View();
-        }
     }
 }

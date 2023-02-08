@@ -1,6 +1,7 @@
 ﻿using CRUD_CORE_MVC.Models;
 using System.Data.SqlClient;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace CRUD_CORE_MVC.AccesoDatos
@@ -49,13 +50,25 @@ namespace CRUD_CORE_MVC.AccesoDatos
           public void AgregarContacto(ContactoModel contacto)
         {
             Conexion datos = new Conexion();
+            SqlConnection conexion = new SqlConnection(datos.ConexionSQL); //Hago la conexion a la bd
+            conexion.Open();
+            SqlCommand comando = new SqlCommand("SP_GUARDAR",conexion); //Conecto el comando con la bd y el store procedure
+
+            comando.CommandType = CommandType.StoredProcedure; // Selecciono el tipo de comando
+
             try
             {
-                datos.setSP("SP_GUARDAR");
-                datos.setParametros("@Nombre", contacto.Nombre);
-                datos.setParametros("@Telefono", contacto.Telefono);
-                datos.setParametros("@Correo", contacto.Correo);
-                datos.EjecutarAccion();
+                //datos.setSP("SP_GUARDAR");
+                //datos.setParametros("@Nombre", contacto.Nombre);
+                //datos.setParametros("@Telefono", contacto.Telefono);
+                //datos.setParametros("@Correo", contacto.Correo);
+                //datos.EjecutarAccion();
+
+                //Reemplazo las variables de la sp por los att de los contactos
+                comando.Parameters.AddWithValue("@Nombre", contacto.Nombre);
+                comando.Parameters.AddWithValue("@Correo", contacto.Correo);
+                comando.Parameters.AddWithValue("@Telefono", contacto.Telefono);
+                comando.ExecuteNonQuery(); //Hago el commit
             }
             catch (Exception)
             {
@@ -64,7 +77,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
             }
             finally
             {
-                datos.CerrarConexion();
+                conexion.Close(); //Cierro conexion
             }
 
         }
