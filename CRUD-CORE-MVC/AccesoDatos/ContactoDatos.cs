@@ -109,7 +109,6 @@ namespace CRUD_CORE_MVC.AccesoDatos
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -151,7 +150,7 @@ namespace CRUD_CORE_MVC.AccesoDatos
             }
         }
 
-        public void EliminarContacto(int idContacto)
+        public bool EliminarContacto(int idContacto)
         {
             Conexion datos = new Conexion();
             SqlConnection conexion = new SqlConnection(datos.ConexionSQL);
@@ -164,12 +163,13 @@ namespace CRUD_CORE_MVC.AccesoDatos
             {
 
                 comando.ExecuteNonQuery();
+                return true;
                 
             }
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
             finally
             {

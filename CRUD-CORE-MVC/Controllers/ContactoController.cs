@@ -2,6 +2,7 @@
 using CRUD_CORE_MVC.AccesoDatos;
 using CRUD_CORE_MVC.Models;
 using NuGet.Packaging.Rules;
+using System.Diagnostics.Contracts;
 
 namespace CRUD_CORE_MVC.Controllers
 {
@@ -73,10 +74,27 @@ namespace CRUD_CORE_MVC.Controllers
             }
         }
 
+
         public IActionResult Eliminar(int idContacto)
         {
-            datos.EliminarContacto(idContacto);
-            return RedirectToAction("Listar");
+            var contacto = datos.ObtenerContacto(idContacto);
+            return View(contacto);
+        }
+
+        [HttpPost]
+        public IActionResult Eliminar(ContactoModel contacto )
+        {
+            bool respuesta = datos.EliminarContacto(contacto.idContacto);
+
+            if (respuesta) 
+            {
+                return RedirectToAction("Listar");
+
+            }
+            else
+            {
+                return View();
+            }
         }
 
     }
