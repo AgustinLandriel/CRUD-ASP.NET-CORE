@@ -57,13 +57,13 @@ namespace CRUD_CORE_MVC.AccesoDatos
                 while (datos.Lector.Read())
                 {
                     usuario.idUsuario = (int)datos.Lector["idUsuario"];
-                    usuario.User = (string)datos.Lector["User"];
-                    usuario.Contraseña = (string)datos.Lector["Contraseña"];
                     usuario.tipoUser = (bool)datos.Lector["tipoUsuario"];
-
-                    return true;
                 }
-                return false;
+
+                if (usuario.idUsuario != 0)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception)
             {

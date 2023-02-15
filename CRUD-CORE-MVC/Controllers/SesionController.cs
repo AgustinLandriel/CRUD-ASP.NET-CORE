@@ -1,6 +1,7 @@
 ﻿using CRUD_CORE_MVC.Models;
 using CRUD_CORE_MVC.AccesoDatos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace CRUD_CORE_MVC.Controllers
 {
@@ -54,6 +55,7 @@ namespace CRUD_CORE_MVC.Controllers
 
             if (respuesta) // Si respuesta es true es porque se creo el user
             {
+                
                 return RedirectToAction("Listar", "Contacto");
             }
             else
