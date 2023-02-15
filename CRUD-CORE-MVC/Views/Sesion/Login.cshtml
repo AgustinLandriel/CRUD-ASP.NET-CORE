@@ -1,22 +1,24 @@
-﻿
+﻿@model UsuarioModel
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3 class="p-3 mb-2 bg-dark text-white">Login</h3>
-<form class="shadow-lg p-3 mb-5 bg-white rounded">
+<form asp-action="Login" asp-controller="Sesion" method="post" class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Usuario</label>
-        <input type="text" class="form-control">
+        <label class="form-label">Usuario</label>
+        <input asp-for="User" type="text" class="form-control">
+        <span asp-validation-for="User" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" class="form-control">
+        <input asp-for="Contraseña" type="password" class="form-control">
+        <span asp-validation-for="Contraseña" class="text-danger"></span>
     
     </div>
 
-    <a asp-action="Listar" asp-controller="Contacto" class="btn btn-primary">Entrar</a>
+    <button type="submit" class="btn btn-primary">Entrar</button>
     <a asp-action="Registro" asp-controller="Sesion" class="btn btn-success">Volver</a>
 </form>
 
